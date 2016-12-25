@@ -26,13 +26,9 @@ public class EventBusActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_event_bus);
-
         initView();
-
         initData();
-
         initListener();
     }
 
@@ -41,9 +37,7 @@ public class EventBusActivity extends Activity {
         bt_eventbus_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(EventBusActivity.this, EventBusSendActivity.class);
-
                 startActivity(intent);
             }
         });
@@ -54,10 +48,8 @@ public class EventBusActivity extends Activity {
             public void onClick(View v) {
                 // 2 发送粘性事件
                 EventBus.getDefault().postSticky(new StickyEvent("我是粘性事件"));
-
                 // 跳转到发送数据页面
                 Intent intent = new Intent(EventBusActivity.this, EventBusSendActivity.class);
-
                 startActivity(intent);
             }
         });
@@ -65,14 +57,12 @@ public class EventBusActivity extends Activity {
 
     private void initData() {
         tv_title.setText("EventBus");
-
         // 1注册广播
         EventBus.getDefault().register(EventBusActivity.this);
     }
 
     private void initView() {
         tv_title = (TextView)findViewById(R.id.tv_title);
-
         bt_eventbus_send = (Button)findViewById(R.id.bt_eventbus_send);
         bt_eventbus_sticky = (Button)findViewById(R.id.bt_eventbus_sticky);
         tv_eventbus_result = (TextView)findViewById(R.id.tv_eventbus_result);
@@ -82,7 +72,6 @@ public class EventBusActivity extends Activity {
     // 5接收消息
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void MesssageEventBus(MessageEvent event){
-
         // 显示接收的消息
         tv_eventbus_result.setText(event.name);
     }
@@ -90,7 +79,6 @@ public class EventBusActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         // 2 解注册
         EventBus.getDefault().unregister(EventBusActivity.this);
     }

@@ -21,19 +21,14 @@ public class EventBusSendActivity extends Activity {
     private Button bt_eventbus_send_main;
     private Button bt_eventbus_send_sticky;
     private TextView tv_eventbus_send_result;
-
     boolean isFirstFlag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_event_bus_send);
-
         initView();
-
         initData();
-
         initListener();
     }
 
@@ -44,7 +39,6 @@ public class EventBusSendActivity extends Activity {
             public void onClick(View v) {
                 // 4 发送消息
                 EventBus.getDefault().post(new MessageEvent("主线程发送过来的数据"));
-
                 // 结束当前页面
                 finish();
             }
@@ -54,15 +48,11 @@ public class EventBusSendActivity extends Activity {
         bt_eventbus_send_sticky.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(isFirstFlag) {
-
                     isFirstFlag = false;
-
                     // 4 注册
                     EventBus.getDefault().register(EventBusSendActivity.this);
                 }
-
             }
         });
     }
@@ -89,7 +79,6 @@ public class EventBusSendActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         // 5 解注册
         EventBus.getDefault().removeAllStickyEvents();
         EventBus.getDefault().unregister(EventBusSendActivity.this);
